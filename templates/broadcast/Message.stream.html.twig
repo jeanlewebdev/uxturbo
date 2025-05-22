@@ -1,0 +1,12 @@
+{% block create %}
+
+    <turbo-stream action="append" target="messages">
+        <template>
+            <mess id="{{ 'message_' ~ message.id }}"><strong>{{ message.author.email }} said :</strong>{{ message.content }}</mess>
+        </template>
+    </turbo-stream>
+
+
+{% endblock %}
+{% block update %} {% endblock %}
+{% block remove %} {% endblock %}

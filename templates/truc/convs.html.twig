@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h3>you are id : {{ app.user.id }}  mail {{ app.user.email }} </h3>
+    <h3>users</h3>
+    {% for user in users %}
+
+        {% if user != app.user %}
+
+            <a href="{{ path('app_conversation_openwith', {id:user.id}) }}">id : {{ user.id }} , mail : {{ user.email }}</a><br>
+
+        {% endif %}
+    {% endfor %}
+    <h3>conversations</h3>
+    {% for conversation in app.user.conversations %}
+
+        <a href="{{ path('app_conversation_open', {id:conversation.id}) }}">{{ conversation.id }} with
+        {% for participant in conversation.participant %}
+            {% if participant == app.user %}
+                <span><strong>you</strong></span>
+            {% else %}
+            <span>{{ participant.email }}</span>
+            {% endif %}
+            <span> and </span>
+        {% endfor %}
+        </a><br>
+
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

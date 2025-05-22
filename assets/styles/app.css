@@ -1,3 +1,7 @@
 body {
     background-color: skyblue;
 }
+#messages{
+    display:flex;
+    flex-direction: column;
+}

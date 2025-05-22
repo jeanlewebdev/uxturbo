@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    mercure.jwt_secret: '%env(MERCURE_JWT_SECRET)%'
 
 services:
     # default configuration for services in *this* file
@@ -22,3 +23,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\MercureJwtGenerator:
+        arguments:
+            # For the 'string $mercureSecret' argument, use the 'mercure.jwt_secret' parameter
+            $mercureSecret: '%mercure.jwt_secret%'
+            # For the 'Security $security' argument, autowiring usually handles this,
+            # but you can explicitly specify '@security' if needed for clarity or troubleshooting.
+            # $security: '@security'

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TrucController!{% endblock %}
+
+{% block body %}
+<h3>Messages</h3>
+    <div id="messages" {{ turbo_stream_listen('chat') }}>
+        {% for message in messages %}
+            <p>{{ message.content }}</p>
+            <twig:MessageComponent :message="message"></twig:MessageComponent>
+        {% endfor %}
+    </div>
+<turbo-frame id="message_form">
+    {{ form_start(form) }}
+    {{ form_widget(form.content) }}
+    <button type="submit">post</button>
+    {{ form_end(form) }}
+</turbo-frame>
+
+{% endblock %}
+
+{#{% block javascripts %}#}
+
+{#{{ parent() }}#}
+{#    <script>#}
+{#        const eventSource = new EventSource("{{ mercure('chat')|escape('js') }}");#}
+{#        eventSource.onmessage = event => {#}
+{#            // Will be called every time an update is published by the server#}
+{#            console.log(JSON.parse(event.data));#}
+{#        const messages = document.querySelector('#messages')#}
+
+{#            messages.append(JSON.parse(event.data).message)#}
+{#        }#}
+{#    </script>#}
+
+{#{% endblock %}#}
